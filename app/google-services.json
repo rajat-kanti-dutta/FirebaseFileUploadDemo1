@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1058575426902",
+    "project_id": "fir-fileuploaddemo1",
+    "storage_bucket": "fir-fileuploaddemo1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058575426902:android:9adce5f003fbbcaa3b62f7",
+        "android_client_info": {
+          "package_name": "com.rajat.firebasefileuploaddemo1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058575426902-dpldt7qt26sn9hvmt217p4qrlbfu39bp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2GlQnNaBytVO0guB7i9hFaxssh5Jq8rs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058575426902-dpldt7qt26sn9hvmt217p4qrlbfu39bp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
