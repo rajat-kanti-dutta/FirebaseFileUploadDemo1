@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:ignore="ExtraText">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Firebase Cloud Storage File Upload Demo"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="26sp"
         android:textStyle="bold"
         android:id="@+id/tvHeading"
         android:layout_centerHorizontal="true"
@@ -26,6 +27,7 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         tools:srcCompat="@drawable/mylogo"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,6 +35,7 @@
         android:layout_below="@id/uploadImage"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
+        android:id="@+id/buttonRelative"
         android:gravity="center_horizontal">
     <Button
         android:layout_width="wrap_content"
@@ -49,6 +52,28 @@
         android:layout_marginTop="20dp"
         android:text="Upload"
         android:layout_marginLeft="20dp"/>
+
     </RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/buttonRelative"
+    android:layout_marginTop="20sp">
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:id="@+id/progressBar"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="0.0%"
+        android:textSize="20dp"
+        android:id="@+id/textProgress"/>
+
+</RelativeLayout>
 
 </RelativeLayout>

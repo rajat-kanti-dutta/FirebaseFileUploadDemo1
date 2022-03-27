@@ -15,11 +15,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.rajat.firebasefileuploaddemo1.databinding.ActivityMainBinding;
@@ -32,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
    ActivityMainBinding binding;
    Uri imageURI;
    StorageReference storageReference;
+   ProgressBar progressBar;
+   TextView txtViewProgress;
+
    ActivityResultLauncher<Intent> imageSelectionResultLauncher = registerForActivityResult(
            new ActivityResultContracts.StartActivityForResult(),
            new ActivityResultCallback<ActivityResult>() {
@@ -42,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
                           if(result.getData() != null){
                               imageURI=result.getData().getData();
                               binding.uploadImage.setImageURI(imageURI);
+                              binding.progressBar.setVisibility(View.VISIBLE);
+                              binding.textProgress.setVisibility(View.VISIBLE);
                           }
                       }
                }
@@ -53,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.progressBar.setVisibility(View.GONE);
+        binding.textProgress.setVisibility(View.GONE);
+
         //
         binding.pickImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,13 +91,23 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             binding.uploadImage.setImageURI(null);
+                            binding.progressBar.setProgress(0);
+                            binding.textProgress.setText("Uploaded 100%");
                         Toast.makeText(getApplicationContext(),"Successfully Uploaded",Toast.LENGTH_LONG).show();
 
                     }
-                }).addOnFailureListener(new OnFailureListener() {
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                double progress = (100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                Log.e("FIREBASE",snapshot.getBytesTransferred()+"%");
+                binding.progressBar.setProgress((int)progress);
+                binding.textProgress.setText(progress+"%");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.e("FIREBASE",e.getMessage());
+               // Log.e("FIREBASE",e.getMessage());
                 Toast.makeText(getApplicationContext(),"Failed to upload",Toast.LENGTH_LONG).show();
             }
         });
